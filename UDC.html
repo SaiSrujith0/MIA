@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>UDC</title>
+<style>
+html{ border:none;}
+body{ 
+  font-family: sens-serif;  
+  background-color:black; 
+
+} 
+h1{FONT-family:system-ui;
+text-align:left;
+color:white;
+transform:translate(600px,100px);
+
+} 
+button { padding:5px;
+margin:10px;       
+        border: 1px groove;
+border-radius:5px;
+  
+        cursor: pointer;
+/*animation: an 4s ease 2s alternate 3; */
+   
+     }
+button:hover{
+background-color:black;
+color:white;}
+#s,input{
+border:1px groove;
+border-radius:5px;
+} 
+/*::-webkit-input-placeholder{
+text-align:center;} */
+
+ form { text-align: center;
+color:black;  
+        border: 2px groove; 
+   background-color:white;
+   padding:40px 20px 10px 20px;
+   margin:100px 300px 100px 700px;
+   border-radius:20%;
+   transform:translate(100px,100px);
+/*animation: an 4s ease 2s alternate 3; */
+
+    }
+@keyframes  an{
+from{background-color:black;}
+to{background-color:white;
+color:black;}}
+</style>
+<script>
+function fun(){
+/*let v=new Date();
+alert("success\n"+v.getDay());*/}
+</script>
+</head>
+  <body>    
+    <center> <h1> UDC</h1> </center>   
+    <form>   
+    <label>Username </label>   
+            <input type="text" placeholder="UsernameSurname" name="username" required> <br><br> 
+            <label>Email</label>   
+            <input type="email" placeholder="dname@gmail.com" name="password" required><br><br>  
+      <label for="pet-select">Qualification </label>
+
+<select id='s' required>
+    <option value="g">graduation</option>
+    <option value="pg">post-graduation</option>
+    <option value="i">12th</option>
+    <option value="t">10th</option>
+  <option value="o" selected>other</option>
+</select><br><br>
+      <button  onclick="fun()" type="submit"><strong>record</strong></button>
+    </form>     
+</body>     
+</html> 
