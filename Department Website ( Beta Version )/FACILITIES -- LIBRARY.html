@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 2</title>
+  <style>
+    body {
+      margin: 0 auto;
+      width: 70%;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header styles */
+    header {
+      height: 80px;
+      background-color: #f4f4f4;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    header .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background-color: #eaf4fc;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-section h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      color: #333;
+    }
+
+    .hero-section p {
+      margin: 0;
+      font-size: 18px;
+      color: #666;
+    }
+
+    /* Main layout */
+    main {
+      display: flex;
+      flex: 1;
+    }
+
+    .right-nav {
+      width: 180px;
+      background-color: #f9f9f9;
+      padding: 0;
+      margin-left: 10px;
+      box-shadow: -1px 0 3px rgba(0, 0, 0, 0.1);
+      position: relative;
+      border-radius: 20px;
+      z-index: 1;
+    }
+
+    .right-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .right-nav ul li {
+      margin: 0;
+      position: relative;
+    }
+
+    .right-nav ul li a {
+      text-decoration: none;
+      color: pink;
+      font-weight: bold;
+      cursor: pointer;
+      display: block;
+      padding: 10px 20px;
+      background-color: skyblue;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    .right-nav ul li a:hover, .right-nav ul li a:focus {
+      background-color: #87ceeb;
+      color: white;
+    }
+
+    .right-nav ul li ul {
+      display: none;
+      padding: 0;
+      margin: 0;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      border: 2px solid pink;
+      border-radius: 5px;
+      background-color: white;
+      width: 200px;
+    }
+
+    .right-nav ul li ul.show {
+      display: block;
+    }
+
+    .right-nav ul li ul li a {
+      font-weight: bold;
+      color: pink;
+      background-color: skyblue;
+      padding: 10px 20px;
+      text-align: center;
+    }
+
+    .right-nav ul li ul li a:hover {
+      background-color: #87ceeb;
+      color: white;
+    }
+
+    .blog-section {
+      flex: 1;
+      padding: 20px;
+      background-color: #ffffff;
+    }
+
+    .image-link {
+        position: relative;
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      .image-link img {
+        width: 600px;
+        height: 500px;
+        display:inline-flex;
+        margin-left: 100px;
+        border-radius: 40px;
+        margin-bottom: 80px;
+        margin-top:50px;
+      }
+
+      .image-link .overlay-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        color: black;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        margin-left: 50px;
+        margin-top: -20px;
+      }
+
+      .image-link:hover .overlay-text {
+        opacity: 1;
+      }
+
+      body {
+        margin: 0 auto;
+        width: 70%;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header styles */
+    header {
+      height: 80px;
+      background-color: #f4f4f4;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    header .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background-color: white;
+      padding: 20px 0;
+      text-align: center;
+      position: relative; /* For positioning navigation buttons */
+      height: 300px; /* Reduced height for more space in the main section */
+      box-shadow: none;
+    }
+
+    .hero-slide {
+      display: none;
+      height: 100%;
+      width: 100%;
+    }
+
+    .hero-slide.active {
+      display: block;
+    }
+
+    .hero-slide:nth-child(1) {
+      background-color: #FFB6C1;
+    }
+
+    .hero-slide:nth-child(2) {
+      background-color: #98FB98;
+    }
+
+    .hero-slide:nth-child(3) {
+      background-color: #ADD8E6;
+    }
+
+    .hero-slide:nth-child(4) {
+      background-color: #FFD700;
+    }
+
+    .hero-slide:nth-child(5) {
+      background-color: #D3D3D3;
+    }
+
+    /* Navigation buttons */
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 24px;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .nav-button-left {
+      left: 20px; /* Add space from the left edge */
+    }
+
+    .nav-button-right {
+      right: 20px; /* Add space from the right edge */
+    }
+
+    /* Main layout */
+    main {
+      display: flex;
+      flex: 1;
+      background-color: white;
+    }
+
+    .right-nav {
+      width: 180px; /* Reduced width */
+      background-color: white;
+      padding: 0;
+      margin-left: 10px; /* Moved closer to the blog section */
+     
+      position: relative;
+      /* Add rounded corners to the entire navigation box */
+    }
+
+
+    .right-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .right-nav ul li {
+      margin: 0;
+      position: relative; /* Necessary for dropdown positioning */
+    }
+
+    .right-nav ul li a {
+      text-decoration: none;
+      color: pink; /* Pink text color for the tabs */
+      font-weight: bold; /* Bold text for the main navigation items */
+      cursor: pointer;
+      display: block;
+      padding: 10px 20px; /* Adjusted padding for normal width */
+      background-color: skyblue; /* Sky blue background */
+      border-bottom: 1px solid #ddd; /* Border for separation */
+      text-align: center; /* Align text to the center */
+    }
+
+    .right-nav ul li a:hover, .right-nav ul li a:focus {
+      background-color: #87ceeb; /* Slightly darker sky blue on hover */
+      color: white; /* White text on hover */
+    }
+
+    /* Dropdown positioning to the right */
+    .right-nav ul li ul {
+      display: none;
+      padding: 0;
+      margin: 0;
+      position: absolute; /* Absolute positioning for the dropdown */
+      top: 0;
+      left: 100%; /* Position the dropdown to the right of the parent */
+      border: 2px solid pink; /* Pink border around the dropdown */
+      border-radius: 5px;
+      background-color: white; /* White background for the dropdown */
+      width: 200px; /* Set a fixed width for the dropdown */
+    }
+
+    /* Display dropdown menu when clicked */
+    .right-nav ul li ul.show {
+      display: block;
+    }
+
+    /* Dropdown links (same as parent tabs color scheme) */
+    .right-nav ul li ul li a {
+      font-weight: bold; /* Bold text for dropdown items */
+      color: pink; /* Pink text color */
+      background-color: skyblue; /* Sky blue background */
+      padding: 10px 20px; /* Adjusted padding for normal width */
+      text-align: center; /* Center text in the dropdown */
+    }
+
+    .right-nav ul li ul li a:hover {
+      background-color: #87ceeb; /* Slightly darker sky blue on hover */
+      color: white; /* White text on hover */
+    }
+
+header {
+  background-color:white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 300px; /* Increased padding for better visibility */
+}
+
+/* First part of the header */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header-top .logo-text {
+  font-size: 36px; /* Larger size for better visibility */
+  font-weight: normal; /* Use normal weight for a cleaner look */
+  font-family: 'Great Vibes'; /* Professional cursive font */
+  color:red; /* Optional: Change text color */
+  letter-spacing: 1px; /* Optional: Add spacing between letters */
+  text-transform: uppercase; /* Optional: Make it all uppercase */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  /* Optional: Add a subtle shadow for depth */
+}
+/* Apply the Great Vibes font */
+/* Apply the Great Vibes font */
+.logo-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 36px; /* Adjust the size as needed */
+  color:red; /* Optional: Customize the text color */
+  display: inline-block;
+  white-space: nowrap; /* Prevent line break */
+  position: relative;
+  overflow: hidden; /* Hide the overflowing text during animation */
+}
+
+/* Animation for each letter */
+.logo-text .letter {
+  opacity: 0; /* Start with each letter invisible */
+  display: inline-block;
+  animation: fadeInOut 4s infinite; /* Make the animation repeat forever */
+  animation-timing-function: ease-in-out; /* Smooth fade-in/fade-out */
+  transform: translateY(10px); /* Optional: Slight upward movement */
+}
+
+/* Keyframes for the fade effect */
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(10px); /* Optional: Slight upward movement */
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add no animation effect for the space */
+.logo-text .space {
+  display: inline-block;
+  width: 10px; /* Space width to simulate gap between words */
+}
+
+
+
+.social-buttons {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+  justify-content: flex-end; /* Align buttons to the right */
+  flex-grow: 1;
+}
+.social-buttons a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: white;
+  font-size: 16px; /* Increased font size */
+  padding: 8px 12px; /* Larger button size */
+  border-radius: 5px;
+  background-color: #3b5998; /* Facebook color */
+  transition: background-color 0.3s ease;
+}
+
+.social-buttons a.twitter { background-color: #1da1f2; }
+.social-buttons a.youtube { background-color: #ff0000; }
+.social-buttons a.linkedin { background-color: #0077b5; }
+.social-buttons a.instagram { background-color: #e1306c; }
+
+.social-buttons a:hover {
+  opacity: 0.8;
+}
+
+/* Second part of the header */
+.header-bottom {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  margin-top: 10px; /* Increased padding for more space */
+  flex-wrap: wrap;
+  background-color: white;
+   /* Adjust padding as needed */
+  text-align: center;
+  box-shadow: none; 
+  justify-content: space-around;
+  width:100%;
+  box-sizing: border-box;
+  margin-left: 200px;/* Allow wrapping for smaller screens */
+}
+.logo-section, .logo-section-second {
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+}
+.logo-section {
+  margin-left: -75px;
+}
+.logo-section-second {
+  margin-left: -40px; /* Adjust the value as needed for your desired position */
+}
+
+.header-bottom .logo-image {
+  width: 150px; /* Increased logo size */
+  height: 150px;
+  margin-right: 30px;
+  margin-left: -100px;
+}
+
+.header-bottom .institute-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center text vertically */
+  max-width: 80%; /* Restrict width for better layout */
+}
+
+.header-bottom h1 {
+  margin: 0;
+  font-size: 28px; /* Larger font for Telugu text */
+}
+
+.header-bottom h2 {
+  margin: 10px 0;
+  font-size: 24px; /* Larger font for Hindi text */
+}
+
+.header-bottom h3 {
+  margin: 5px 0;
+  font-size: 100px; /* Larger font for English text */
+  
+}
+
+.header-bottom p:{
+  margin-top: 15px; /* Add some space above the subheading */
+  font-size: 18px; /* Slightly larger font for the subheading */
+  color: #555;
+}
+
+.logo-image {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  margin-right: 20px;
+}
+
+/* Institute Information */
+.institute-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-grow: 1;
+  max-width: 80%;
+}
+
+.institute-info h1, .institute-info h2, .institute-info h3 {
+  margin: 5px 0;
+}
+
+.institute-info h3:last-of-type {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #555;
+}
+/* Styling for the Call to Action Icons */
+.cta-icons {
+  display: flex;
+  gap: 15px; /* Spacing between icons */
+  justify-content: flex-end; /* Align to the right side */
+  align-items: center; /* Vertically center the icons */
+}
+
+.cta-icon {
+  width: 30px; /* Set a uniform size for icons */
+  height: 30px; /* Keep aspect ratio consistent */
+  transition: transform 0.3s ease-in-out; /* Add hover effect */
+}
+
+.cta-icon:hover {
+  transform: scale(1.2); /* Slightly enlarge the icons on hover */
+}
+
+.cta-icon:focus {
+  outline: none; /* Remove the outline when focused */
+}
+
+.footer {
+  background-color: #ff8c00;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  bottom: 0;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: green; /* Optional: accent color */
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-list li {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.contact-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color:#ff8c00; /* CTA button background color */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+  background-color: green; /* Hover effect for the button */
+  color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer h2 {
+    font-size: 1.5rem;
+  }
+
+  .contact-list li {
+    font-size: 1rem;
+  }
+
+  .contact-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .contact-button {
+    padding: 8px 16px;
+    font-size: 1rem;
+  }
+}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <!-- First Part: NITW and Social Buttons -->
+    <div class="header-top">
+      <div class="logo-text">NIT WARANGAL</div>
+      <div class="cta-icons">
+        <a href="https://www.nitw.ac.in" target="_blank">
+          <img src="h.jpeg" alt="Home_NITW" class="cta-icon">
+        </a>
+        <a href="https://www.facebook.com" target="_blank">
+          <img src="f.png" alt="Facebook" class="cta-icon">
+        </a>
+        <a href="https://twitter.com" target="_blank">
+          <img src="t.png" alt="Twitter" class="cta-icon">
+        </a>
+        <a href="https://www.youtube.com" target="_blank">
+          <img src="y.png" alt="YouTube" class="cta-icon">
+        </a>
+        <a href="https://www.linkedin.com" target="_blank">
+          <img src="l.png" alt="LinkedIn" class="cta-icon">
+        </a>
+        <a href="https://www.instagram.com" target="_blank">
+          <img src="i.png" alt="Instagram" class="cta-icon">
+        </a>
+      </div>
+    </div>
+  
+    <!-- Second Part: Logo and Institute Info -->
+    <div class="header-bottom">
+      <!-- First Section -->
+      <div class="logo-section">
+        <img src="mia.jpeg" alt="Institute Logo" class="logo-image">
+        <div class="institute-info">
+          <h1>జాతీయ సాంకేతిక సంస్థ</h1> <!-- Telugu -->
+          <h2>राष्ट्रीय प्रौद्योगिकी संस्थान</h2> <!-- Hindi -->
+          <h3><b>National Institute of Technology</b></h3> <!-- English -->
+          <p><b>A Institute of National Importance</b></p>
+        </div>
+      </div>
+    
+      <!-- Second Section -->
+      <div class="logo-section-second">
+        <img src="L.jpg" alt="Institute Logo" class="logo-image">
+        <div class="institute-info">
+          <h1><b>Transportation Division</b></h1> <!-- English -->
+          <p><b>Department Of Civil Engineering</b></p>
+        </div>
+      </div>
+    </div>
+    
+  
+  </header>
+  
+
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <img class="hero-slide active" src="1.jpg" alt="Slide 1">
+    <img class="hero-slide" src="2.jpeg" alt="Slide 2">
+    <img class="hero-slide" src="3.jpeg" alt="Slide 3">
+    <img class="hero-slide" src="4.jpeg" alt="Slide 4">
+    <img class="hero-slide" src="5.jpeg" alt="Slide 5">
+
+    <!-- Left and Right Navigation Buttons -->
+    <button class="nav-button nav-button-left" onclick="moveSlide(-1)">&lt;</button>
+    <button class="nav-button nav-button-right" onclick="moveSlide(1)">&gt;</button>
+</div>
+
+  <!-- Main Content -->
+  <main class="content">
+    <!-- Navigation Bar -->
+    <nav class="right-nav">
+      <ul>
+        <li>
+          <a href="HOME.html">About</a>
+        </li>
+        <li>
+          <a href="Academics.html"> Academics</a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" onclick="toggleDropdown('people')">WorkForce</a>
+          <ul id="people" class="dropdown">
+            <li><a href="WORKFORCE%20--%20FACULITY.html">Faculty</a></li>
+            <li><a href="WORKFORCE%20--%20STAFF.html">Staff</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="javascript:void(0);" onclick="toggleDropdown('notable-alumni')">Notable Alumni</a>
+          <ul id="notable-alumni" class="dropdown">
+            <li><a href="NOTABLE%20ALUMNI%20--%20PH.D.html">Ph.D</a></li>
+            <li><a href="NOTABLE%20ALUMNI%20--%20M.TECH.html">M.Tech</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="javascript:void(0);" onclick="toggleDropdown('alumni')">Alumni</a>
+          <ul id="alumni" class="dropdown">
+            <li><a href="ALUMINI%20--%20PH.D.html">Ph.D</a></li>
+            <li><a href="ALUMNI%20--%20M.TECH.html">M.Tech</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="javascript:void(0);" onclick="toggleDropdown('laboratory')">Facilities</a>
+          <ul id="laboratory" class="dropdown">
+            <li><a href="FACILITIES%20--%20LABORATORY.html">Laboratory</a></li>
+            <li><a href="FACILITIES%20--%20LIBRARY.html">Library</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="javascript:void(0);" onclick="toggleDropdown('projects')">R&D</a>
+          <ul id="projects" class="dropdown">
+            <li><a href="R&D%20--%20ONGOING%20PROJECTS.html">On-Going Projects</a></li>
+            <li><a href="R&D%20--%20COMPLETED%20PROJECTS.html">Completed Projects</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="HANDY%20WEB%20-%20LINKS.html">Handy Web-Links</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Blog Section -->
+    <div class="blog-section">
+      <a href="https://nitw.ac.in/library" target="_blank" class="image-link">
+        <img src="LIBRARY IMAGE SAMPLE.jpg" alt="Library Image">
+        <span class="overlay-text">CENTRAL LIBRARY</span>
+      </a>
+
+    </div>
+    
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <h2>Contact Us</h2>
+      <ul class="contact-list">
+        <li>
+          <img src="p.png" alt="Phone Icon" class="contact-icon">
+          <a href="tel:+918702459191" class="contact-button">(+91) 8702459191</a>, 
+          <a href="tel:+918702459547" class="contact-button">(+91) 8702459547</a>
+        </li>
+        <li>
+          <img src="em.png" alt="Email Icon" class="contact-icon">
+          <a href="mailto:registrar@nitw.ac.in" class="contact-button">registrar@nitw.ac.in</a>
+        </li>
+        <li>
+          <img src="ad.png" alt="Address Icon" class="contact-icon">
+          <a href="https://www.google.com/maps?q=National+Institute+of+Technology,+Warangal+506004,+TS,+INDIA" target="_blank" class="contact-button">National Institute of Technology, Warangal - 506004, TS, INDIA</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+  
+
+  <script>
+    let activeDropdown = null;
+
+    function toggleDropdown(id) {
+      const dropdown = document.getElementById(id);
+
+      if (activeDropdown && activeDropdown !== dropdown) {
+        activeDropdown.classList.remove('show');
+      }
+
+      dropdown.classList.toggle('show');
+      activeDropdown = dropdown.classList.contains('show') ? dropdown : null;
+    }
+
+    document.addEventListener('click', function(event) {
+      const nav = document.querySelector('.right-nav');
+
+      if (!nav.contains(event.target)) {
+        if (activeDropdown) {
+          activeDropdown.classList.remove('show');
+          activeDropdown = null;
+        }
+      }
+    });
+
+
+    let activeSlideIndex = 0; // Track the current slide index
+    const slides = document.querySelectorAll('.hero-slide');
+
+    // Function to show the next or previous slide
+    function moveSlide(step) {
+      slides[activeSlideIndex].classList.remove('active');
+      activeSlideIndex = (activeSlideIndex + step + slides.length) % slides.length;
+      slides[activeSlideIndex].classList.add('active');
+    }
+
+    // Start the slideshow
+    setInterval(function() {
+      moveSlide(1);
+    }, 5000); // Change slide every 5 seconds
+
+    // Function to toggle dropdown visibility
+    // Function to toggle dropdown visibility
+
+    // JavaScript to wrap each letter in the .logo-text with a <span> tag
+// JavaScript to wrap each letter in the .logo-text with a <span> tag
+  document.addEventListener('DOMContentLoaded', function () {
+  const logoText = document.querySelector('.logo-text');
+  const text = logoText.textContent.trim(); // Get the text content
+
+  // Split the text into individual letters and wrap each in a <span>
+  // Include spaces as well, treating them as an element
+  logoText.innerHTML = text
+    .split('')
+    .map(letter => letter === ' ' ? `<span class="space"></span>` : `<span class="letter">${letter}</span>`)
+    .join('');
+  
+  // Now apply animation to each letter dynamically
+  const letters = document.querySelectorAll('.logo-text .letter');
+  
+  letters.forEach((letter, index) => {
+    letter.style.animationDelay = `${index * 0.2}s`; // Add delay for each letter
+  });
+});
+  </script>
+</body>
+</html>
